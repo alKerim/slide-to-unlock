@@ -46,9 +46,7 @@ const SlideToUnlock = () => {
             setPosition(maxPosition);
             setProgressPercentage(100);
             setIsUnlocked(true);
-            setTimeout(() => {
-                window.location.href = 'https://bw8d.com/collections/collection-1';
-            }, 0);
+            window.location.href = 'https://bw8d.com/collections/collection-1';
         }
     };
 
@@ -59,7 +57,7 @@ const SlideToUnlock = () => {
                 className="relative"
                 style={{
                     width: '375px', // set this to your image's width
-                    height: '867px', // set this to your image's height
+                    height: '667px', // set this to your image's height
                     overflow: 'hidden', // ensures that any overflow (slider) is hidden
                     transform: `translate(${translate.x}px, ${translate.y}px) scale(${zoom}) rotate(${rotation}deg)`,
                     transformOrigin: 'center',
@@ -80,7 +78,7 @@ const SlideToUnlock = () => {
                 <div
                     className="absolute"
                     style={{
-                        bottom: '165px',
+                        bottom: '135px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         paddingBottom: 5,

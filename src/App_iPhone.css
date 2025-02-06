@@ -1,0 +1,86 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+    height: calc(100dvh - env(safe-area-inset-bottom, 0px)); /* Accounts for iOS bottom bar */
+    box-sizing: border-box;
+    padding-bottom: env(safe-area-inset-bottom, 0px); /* Creates breathing room */
+}
+
+@media (max-width: 1280px) {
+    #root {
+        max-width: 100%;
+    }
+}
+
+.logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+}
+.logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
+}
+
+.card {
+    padding: 2em;
+}
+
+.read-the-docs {
+    color: #888;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: url('/fonts/MyriadPro-Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.gradient-text {
+    font-family: 'Myriad Pro', sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    background: linear-gradient(130deg, #474747, #d5d5d5, #474747);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient-animation 3s linear infinite;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

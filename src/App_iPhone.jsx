@@ -53,13 +53,13 @@ const SlideToUnlock = () => {
     };
 
     return (
-        <div className="h-screen bg-gray-100 flex justify-center items-center">
-            {/* This wrapper will define the boundaries for the image and slider */}
+              // This wrapper will define the boundaries for the image and slider
+        <div className="h-screen flex justify-center items-center">
             <div
                 className="relative"
                 style={{
                     width: '375px', // set this to your image's width
-                    height: '667px', // set this to your image's height
+                    height: '867px', // set this to your image's height
                     overflow: 'hidden', // ensures that any overflow (slider) is hidden
                     transform: `translate(${translate.x}px, ${translate.y}px) scale(${zoom}) rotate(${rotation}deg)`,
                     transformOrigin: 'center',
@@ -80,7 +80,7 @@ const SlideToUnlock = () => {
                 <div
                     className="absolute"
                     style={{
-                        bottom: '130px',
+                        bottom: '165px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         paddingBottom: 5,

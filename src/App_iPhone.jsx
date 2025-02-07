@@ -69,7 +69,8 @@ const SlideToUnlock = () => {
                     style={{
                         width: '100%',
                         height: '100%',
-                        objectFit: 'cover'
+                        objectFit: 'cover',
+                        paddingBottom: 50
                     }}
                     draggable="false"
                 />
@@ -78,7 +79,7 @@ const SlideToUnlock = () => {
                 <div
                     className="absolute"
                     style={{
-                        bottom: '135px',
+                        bottom: '165px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         paddingBottom: 5,

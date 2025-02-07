@@ -17,7 +17,11 @@ const SlideToUnlock = () => {
     const [translate, setTranslate] = useState({ x: 0, y: 0 });
 
 
-    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    }));
     const currentDate = new Date().toLocaleDateString("en-US", {
         month: 'long',
         day: 'numeric',
@@ -97,7 +101,7 @@ const SlideToUnlock = () => {
 
                 {/* Clock display overlay */}
 
-                    <div className="clock-text"
+                    <div
                         style={{fontSize: '52px',
                         position: 'absolute',
                         top: '202px',
@@ -111,7 +115,7 @@ const SlideToUnlock = () => {
                         alignItems: 'top',}}>
                         {currentTime}
                     </div>
-                    <div className="clock-text"
+                    <div
                         style={{fontSize: '11px',
                         position: 'absolute',
                         top: '267px',

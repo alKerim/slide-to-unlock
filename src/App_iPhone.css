@@ -77,15 +77,7 @@ html, body {
 }
 
 
-@font-face {
-    font-family: 'Helvetica Neue UltraLight';
-    src: url('/fonts/helvetica-neue-ultra-light.ttc') format('truetype');
-    font-weight: 100;
-}
-.clock-text {
-    font-family: 'Helvetica Neue UltraLight', sans-serif;
-    font-weight: 50;
-}
+
 
 @keyframes gradient-animation {
     0% {

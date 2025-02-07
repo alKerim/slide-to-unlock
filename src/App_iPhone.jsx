@@ -18,7 +18,7 @@ const SlideToUnlock = () => {
 
 
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
-    const currentDate = new Date().toLocaleDateString([], {
+    const currentDate = new Date().toLocaleDateString("en-US", {
         month: 'long',
         day: 'numeric',
         year: 'numeric'

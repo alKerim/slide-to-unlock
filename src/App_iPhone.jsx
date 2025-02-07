@@ -1,4 +1,4 @@
-import {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import './App_iPhone.css';
 
@@ -16,26 +16,28 @@ const SlideToUnlock = () => {
     const [zoom, setZoom] = useState(1);
     const [translate, setTranslate] = useState({ x: 0, y: 0 });
 
-
-    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    }));
-    const currentDate = new Date().toLocaleDateString("en-US", {
+    const [currentTime, setCurrentTime] = useState(
+        new Date().toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+        })
+    );
+    const currentDate = new Date().toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
-        year: 'numeric'
+        year: 'numeric',
     });
-
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentTime(new Date().toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false
-            }));
+            setCurrentTime(
+                new Date().toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false,
+                })
+            );
         }, 1000);
         return () => clearInterval(timer);
     }, []);
@@ -52,6 +54,7 @@ const SlideToUnlock = () => {
         return () => window.removeEventListener('resize', updateWidth);
     }, []);
 
+    // Calculate the maximum position the slider handle can move to
     const maxPosition = sliderWidth - containerPadding - handleWidth;
 
     const handleDrag = (event, info) => {
@@ -74,17 +77,37 @@ const SlideToUnlock = () => {
         }
     };
 
+    // Listen for the pageshow event to reset state when coming back from bfcache
+    useEffect(() => {
+        const handlePageShow = (event) => {
+            // Optionally, check event.persisted if you only want to reset on cached pages
+            if (event.persisted) {
+                setPosition(0);
+                setProgressPercentage(0);
+                setIsUnlocked(false);
+            }
+            // Alternatively, you can reset unconditionally:
+            // setPosition(0);
+            // setProgressPercentage(0);
+            // setIsUnlocked(false);
+        };
+
+        window.addEventListener('pageshow', handlePageShow);
+        return () => window.removeEventListener('pageshow', handlePageShow);
+    }, []);
+
     return (
-              // This wrapper will define the boundaries for the image and slider
+        // This wrapper will define the boundaries for the image and slider
         <div className="h-screen flex justify-center items-center">
             <div
                 className="relative"
                 style={{
-                    width: '375px', // set this to your image's width
-                    height: '667px', // set this to your image's height
+                    width: '395px', // set this to your image's width
+                    height: '737px', // set this to your image's height
                     overflow: 'hidden', // ensures that any overflow (slider) is hidden
                     transform: `translate(${translate.x}px, ${translate.y}px) scale(${zoom}) rotate(${rotation}deg)`,
                     transformOrigin: 'center',
+                    paddingBottom: 50,
                 }}
             >
                 <img
@@ -94,15 +117,15 @@ const SlideToUnlock = () => {
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
-                        paddingBottom: 30
+                        paddingBottom: 30,
                     }}
                     draggable="false"
                 />
 
                 {/* Clock display overlay */}
-
-                    <div
-                        style={{fontSize: '52px',
+                <div
+                    style={{
+                        fontSize: '52px',
                         position: 'absolute',
                         top: '202px',
                         left: '50%',
@@ -112,11 +135,14 @@ const SlideToUnlock = () => {
                         pointerEvents: 'none',
                         display: 'flex',
                         flexDirection: 'column',
-                        alignItems: 'top',}}>
-                        {currentTime}
-                    </div>
-                    <div
-                        style={{fontSize: '11px',
+                        alignItems: 'top',
+                    }}
+                >
+                    {currentTime}
+                </div>
+                <div
+                    style={{
+                        fontSize: '11px',
                         position: 'absolute',
                         top: '267px',
                         left: '50%',
@@ -126,10 +152,11 @@ const SlideToUnlock = () => {
                         pointerEvents: 'none',
                         display: 'flex',
                         flexDirection: 'column',
-                        alignItems: 'top',}}>
-                        {currentDate}
-                    </div>
-
+                        alignItems: 'top',
+                    }}
+                >
+                    {currentDate}
+                </div>
 
                 {/* Position the slider absolutely relative to the wrapper */}
                 <div
@@ -138,17 +165,17 @@ const SlideToUnlock = () => {
                         bottom: '150px',
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        paddingBottom: 5,
+                        paddingBottom: 62,
                     }}
                 >
                     <div
                         className="w-44 h-10.5 bg-gray-300 relative"
                         ref={sliderRef}
-                        style={{padding: 5, borderRadius: '10px'}}
+                        style={{ padding: 5, borderRadius: '10px' }}
                     >
-                    <div
+                        <div
                             className="gradient-text absolute inset-0 flex items-center justify-center text-gray-700 font-bold text-lg pointer-events-none"
-                            style={{paddingLeft: 15}}
+                            style={{ paddingLeft: 15 }}
                         >
                             Slide to shop
                         </div>
@@ -156,21 +183,21 @@ const SlideToUnlock = () => {
                             <motion.div
                                 className="w-8 h-8 bg-white shadow-md cursor-pointer flex items-center justify-center z-10"
                                 drag="x"
-                                dragConstraints={{left: 0, right: maxPosition}}
+                                dragConstraints={{ left: 0, right: maxPosition }}
                                 dragElastic={0}
                                 onDrag={handleDrag}
                                 onDragEnd={handleDragEnd}
-                                animate={{x: position}}
-                                transition={{type: 'spring', stiffness: 300, damping: 30}}
-                                whileHover={{scale: 1.1}}
-                                whileTap={{scale: 0.95}}
+                                animate={{ x: position }}
+                                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
                                 style={{
                                     borderRadius: '6px',
                                     willChange: 'transform',
                                     touchAction: 'none',
                                     userSelect: 'none',
                                     WebkitUserSelect: 'none',
-                                    WebkitTouchCallout: 'none'
+                                    WebkitTouchCallout: 'none',
                                 }}
                             >
                                 <img

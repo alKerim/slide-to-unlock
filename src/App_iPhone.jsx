@@ -96,10 +96,11 @@ const SlideToUnlock = () => {
                 />
 
                 {/* Clock display overlay */}
-                <div
-                    style={{
+
+                    <div className="clock-text"
+                        style={{fontSize: '52px',
                         position: 'absolute',
-                        top: '210px',
+                        top: '202px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         color: '#fff',
@@ -107,16 +108,24 @@ const SlideToUnlock = () => {
                         pointerEvents: 'none',
                         display: 'flex',
                         flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <div style={{fontSize: '38px'}}>
+                        alignItems: 'top',}}>
                         {currentTime}
                     </div>
-                    <div style={{fontSize: '16px'}}>
+                    <div className="clock-text"
+                        style={{fontSize: '11px',
+                        position: 'absolute',
+                        top: '267px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        color: '#fff',
+                        textShadow: '0px 0px 8px rgba(0,0,0,0.8)',
+                        pointerEvents: 'none',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'top',}}>
                         {currentDate}
                     </div>
-                </div>
+
 
                 {/* Position the slider absolutely relative to the wrapper */}
                 <div

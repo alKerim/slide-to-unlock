@@ -16,6 +16,8 @@ const SlideToUnlock = () => {
     const [zoom, setZoom] = useState(1);
     const [translate, setTranslate] = useState({ x: 0, y: 0 });
 
+    const isScreenVertical = window.innerHeight > window.innerWidth;
+
     const [currentTime, setCurrentTime] = useState(
         new Date().toLocaleTimeString([], {
             hour: '2-digit',
@@ -102,12 +104,13 @@ const SlideToUnlock = () => {
             <div
                 className="relative"
                 style={{
-                    width: '395px', // set this to your image's width
-                    height: '737px', // set this to your image's height
+                    height: isScreenVertical ? '737px' :window.innerHeight, // set this to your image's height
+                    width: isScreenVertical ? '430px' : '500px', // set this to your image's width
+
                     overflow: 'hidden', // ensures that any overflow (slider) is hidden
                     transform: `translate(${translate.x}px, ${translate.y}px) scale(${zoom}) rotate(${rotation}deg)`,
                     transformOrigin: 'center',
-                    paddingBottom: 50,
+                    paddingBottom: isScreenVertical ? 80 : 0,
                 }}
             >
                 <img
@@ -117,7 +120,7 @@ const SlideToUnlock = () => {
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
-                        paddingBottom: 30,
+                        // paddingBottom: 30,
                     }}
                     draggable="false"
                 />
@@ -127,7 +130,7 @@ const SlideToUnlock = () => {
                     style={{
                         fontSize: '52px',
                         position: 'absolute',
-                        top: '202px',
+                        top: isScreenVertical ? '202px' : '242px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         color: '#fff',
@@ -144,7 +147,7 @@ const SlideToUnlock = () => {
                     style={{
                         fontSize: '11px',
                         position: 'absolute',
-                        top: '267px',
+                        top: isScreenVertical ? '267px' : '307px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         color: '#fff',
@@ -162,7 +165,7 @@ const SlideToUnlock = () => {
                 <div
                     className="absolute"
                     style={{
-                        bottom: '150px',
+                        bottom: isScreenVertical ? '155px' : '90px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         paddingBottom: 62,

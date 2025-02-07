@@ -76,6 +76,11 @@ html, body {
     animation: gradient-animation 3s linear infinite;
 }
 
+.clock-text {
+    font-family: "/fonts/HelveticaNeue.ttc";
+    font-weight: 100;
+}
+
 @keyframes gradient-animation {
     0% {
         background-position: 200% 0;

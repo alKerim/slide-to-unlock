@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import { motion } from 'framer-motion';
 import './App_iPhone.css';
 
@@ -15,6 +15,26 @@ const SlideToUnlock = () => {
     const [rotation, setRotation] = useState(0);
     const [zoom, setZoom] = useState(1);
     const [translate, setTranslate] = useState({ x: 0, y: 0 });
+
+
+    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+    const currentDate = new Date().toLocaleDateString([], {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+    });
+
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date().toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            }));
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
 
     useLayoutEffect(() => {
         const updateWidth = () => {
@@ -64,7 +84,7 @@ const SlideToUnlock = () => {
                 }}
             >
                 <img
-                    src="/images/borndifferent_screen.png"
+                    src="/images/borndifferent_screen_no_text.png"
                     alt="iPhone Screen"
                     style={{
                         width: '100%',
@@ -74,6 +94,29 @@ const SlideToUnlock = () => {
                     }}
                     draggable="false"
                 />
+
+                {/* Clock display overlay */}
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '210px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        color: '#fff',
+                        textShadow: '0px 0px 8px rgba(0,0,0,0.8)',
+                        pointerEvents: 'none',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <div style={{fontSize: '38px'}}>
+                        {currentTime}
+                    </div>
+                    <div style={{fontSize: '16px'}}>
+                        {currentDate}
+                    </div>
+                </div>
 
                 {/* Position the slider absolutely relative to the wrapper */}
                 <div
@@ -88,11 +131,11 @@ const SlideToUnlock = () => {
                     <div
                         className="w-44 h-10.5 bg-gray-300 relative"
                         ref={sliderRef}
-                        style={{ padding: 5, borderRadius: '10px' }}
+                        style={{padding: 5, borderRadius: '10px'}}
                     >
-                        <div
+                    <div
                             className="gradient-text absolute inset-0 flex items-center justify-center text-gray-700 font-bold text-lg pointer-events-none"
-                            style={{ paddingLeft: 15 }}
+                            style={{paddingLeft: 15}}
                         >
                             Slide to shop
                         </div>
@@ -100,14 +143,14 @@ const SlideToUnlock = () => {
                             <motion.div
                                 className="w-8 h-8 bg-white shadow-md cursor-pointer flex items-center justify-center z-10"
                                 drag="x"
-                                dragConstraints={{ left: 0, right: maxPosition }}
+                                dragConstraints={{left: 0, right: maxPosition}}
                                 dragElastic={0}
                                 onDrag={handleDrag}
                                 onDragEnd={handleDragEnd}
-                                animate={{ x: position }}
-                                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
+                                animate={{x: position}}
+                                transition={{type: 'spring', stiffness: 300, damping: 30}}
+                                whileHover={{scale: 1.1}}
+                                whileTap={{scale: 0.95}}
                                 style={{
                                     borderRadius: '6px',
                                     willChange: 'transform',

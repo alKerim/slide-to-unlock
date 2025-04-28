@@ -75,7 +75,7 @@ const SlideToUnlock = () => {
             setPosition(maxPosition);
             setProgressPercentage(100);
             setIsUnlocked(true);
-            window.location.href = 'https://bw8d.com/collections/collection-1';
+            window.location.href = 'https://store.bw8d.com/collections/all';
         }
     };
 
